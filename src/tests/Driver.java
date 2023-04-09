@@ -1,6 +1,12 @@
 package tests;
 
-import model.Person;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import model.*;
+
 
 /**************************************************************
 * Name        : 
@@ -27,14 +33,27 @@ public class Driver {
 	 * Description of method
 	 * @param paramName
 	 * @return
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
-		Person person = new Person("Amy", 0, 8);
-		System.out.println(person.getAge());
-		System.out.println(person.toString());
-		person.setConsiderations(false);
-		person.setConsiderText("Wheelchair");
-		System.out.println(person.toString());
+	public static void main(String[] args) throws IOException {
+		Person person1 = new Person("Amy", 53, 0);
+		Person person2 = new Person("John", 55, 0);
+		Person person3 = new Person("Zac", 33, 0);
+		person3.setConsiderText("Wheelchair");
+		person3.setConsiderations(true);
+		Boat myBoat = new Boat("SysOut to Sea", 12);
+		myBoat.addPerson(person1);
+		myBoat.addPerson(person2);
+		myBoat.addPerson(person3);
+		//System.out.println(person1.toString());
+		myBoat.deletePerson(person2);
+		
+		BufferedReader reader = new BufferedReader(new FileReader("names.txt"));
+		Person person4 = new Person();
+		
+		person4.setName(reader.readLine());
+		myBoat.addPerson(person4);
+		myBoat.printParty();
 	}
 
 }

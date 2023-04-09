@@ -1,5 +1,7 @@
 package model;
 
+import java.util.LinkedList;
+
 /**************************************************************
 * Name        : 
 * Author      : Amy Miles
@@ -23,6 +25,19 @@ public class Boat {
 	
 	private String name;
 	private int capacity;
+	private LinkedList<Person> party;
+	
+	public Boat() {
+		
+	}
+	
+	public Boat(String name, int capacity) {
+		this.name = name;
+		this.capacity = capacity;
+		this.party = new LinkedList<>();
+	}
+	
+	
 	/**
 	 * @return the name
 	 */
@@ -48,5 +63,18 @@ public class Boat {
 		this.capacity = capacity;
 	}
 	
+	public void addPerson(Person person) {
+		party.add(person);
+	}
+	
+	public void deletePerson(Person person) {
+		party.remove(person);
+	}
+	
+	public void printParty() {
+		for (Person person : party) {
+			System.out.println(person.toString());
+		}
+	}
 	
 }

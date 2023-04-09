@@ -28,14 +28,30 @@ public class Person {
 	private int years = 0;//default
 	private int months = 0;//default
 	private boolean considerations = false;//default
-	private String considerText;
+	private String considerText;//special considerations text info
 	
+	/**
+	 * Default constructor
+	 */
+	public Person() {
+		
+	}
+	
+	/**
+	 * Parameterized constructor
+	 *@param name String name of person
+	 *@param years Integer age of person in years
+	 *@param months Integer age of person in months
+	 */
 	public Person(String name, int years, int months) {
 		this.name = name;
 		this.years = years;
 		this.months = months;	
-	}	
+	}
+	
 	/**
+	 * Returns the age of the person in years and months,
+	 * since some ages of youth will be entered as months
 	 * @return the age
 	 */
 	public String getAge() {
