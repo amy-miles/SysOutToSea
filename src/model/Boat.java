@@ -23,43 +23,59 @@ import java.util.LinkedList;
 
 public class Boat {
 	
-	private String name;
-	private int capacity;
-	private LinkedList<Person> party;
-	private int remaining;
+	private String name;//name of the boat object
+	private int capacity;//capacity of boat
+	private LinkedList<LinkedList<Person>> manifest;
+	private LinkedList<Person> party;//for list of people objects
+	private int remaining;//to keep track of remaining capacity
 	
+	/**
+	 * Default Constructor
+	 */
 	public Boat() {
 		
 	}
 	
+	/**
+	 * Parameterized constructor
+	 *@param name String name of boat object
+	 *@param capacity Integer of number of people objects
+	 */
 	public Boat(String name, int capacity) {
 		this.name = name;
 		this.capacity = capacity;
-		this.party = new LinkedList<>();
+		manifest = new LinkedList<>();		
 		this.remaining = capacity;
 	}
 	
+	/**
+	 * @return true if full
+	 */
 	public boolean isFull() {
 		return remaining == 0;
 	}
+	
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	/**
 	 * @return the capacity
 	 */
 	public int getCapacity() {
 		return capacity;
 	}
+	
 	/**
 	 * @param capacity the capacity to set
 	 */
@@ -67,11 +83,19 @@ public class Boat {
 		this.capacity = capacity;
 	}
 	
+	/**
+	 *Adds a person to the party linked list
+	 * @param person
+	 */
 	public void addPerson(Person person) {
 		party.add(person);
 		remaining -= 1;
 	}
 	
+	/**
+	 * Removes a person from the linkedlist
+	 * @param person to be removed
+	 */
 	public void deletePerson(Person person) {
 		party.remove(person);
 	}
@@ -88,6 +112,34 @@ public class Boat {
 	 */
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;
+	}
+	
+	/**
+	 * @return the manifest
+	 */
+	public LinkedList<LinkedList<Person>> getManifest() {
+		return manifest;
+	}
+
+	/**
+	 * @param manifest the manifest to set
+	 */
+	public void setManifest(LinkedList<LinkedList<Person>> manifest) {
+		this.manifest = manifest;
+	}
+
+	/**
+	 * @return the party
+	 */
+	public LinkedList<Person> getParty() {
+		return party;
+	}
+
+	/**
+	 * @param party the party to set
+	 */
+	public void setParty(LinkedList<Person> party) {
+		this.party = party;
 	}
 
 	public String printParty() {
