@@ -19,6 +19,11 @@ package model;
 * my program.         
 ***************************************************************/
 
-public class Reservation {
-
+public class ReservationList {
+	
+	
+	
+	public ReservationList() {
+		
+	}
 }

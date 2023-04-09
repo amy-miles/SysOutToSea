@@ -41,19 +41,20 @@ public class Driver {
 		Person person3 = new Person("Zac", 33, 0);
 		person3.setConsiderText("Wheelchair");
 		person3.setConsiderations(true);
-		Boat myBoat = new Boat("SysOut to Sea", 12);
+		Boat myBoat = new Boat("SysOut to Sea", 4);
 		myBoat.addPerson(person1);
 		myBoat.addPerson(person2);
 		myBoat.addPerson(person3);
 		//System.out.println(person1.toString());
-		myBoat.deletePerson(person2);
+		//myBoat.deletePerson(person2);
 		
 		BufferedReader reader = new BufferedReader(new FileReader("names.txt"));
 		Person person4 = new Person();
-		
+		System.out.println(myBoat.getName());
 		person4.setName(reader.readLine());
 		myBoat.addPerson(person4);
-		myBoat.printParty();
+		System.out.println(myBoat.printParty());
+		System.out.println(myBoat.getRemaining());
 	}
 
 }

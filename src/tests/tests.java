@@ -36,7 +36,7 @@ class tests {
 	}
 	
 	@Test
-	void testGetSetName() {
+	void testGetSetNamePerson() {
 		Person person = new Person();
 		String expected, actual;
 		expected = "Amy";
@@ -81,6 +81,66 @@ class tests {
 		person.setConsiderations(true);
 		//assert
 		assertTrue(person.isConsiderations());
+	}
+	
+	@Test
+	void testToString() {
+		//arrange
+		Person person = new Person("Amy", 53, 0);
+		String expected, actual;
+		expected = "Amy 53 years";
+		//act
+		actual = person.toString();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testCreateBoat() {
+		//arrange
+		Boat boat = new Boat();
+		//assert
+		assertNotNull(boat);
+	}
+	
+	@Test
+	void testGetSetNameBoat() {
+		//arrange
+		Boat boat = new Boat();
+		String expected, actual;
+		expected = "Sting Array";
+		//assert
+		boat.setName("Sting Array");
+		actual = boat.getName();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testGetSetCapacity() {
+		//arrange
+		Boat boat = new Boat();
+		int expected, actual;
+		expected = 12;
+		//assert
+		boat.setCapacity(12);
+		actual = boat.getCapacity();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testAddDeletePerson() {
+		Boat boat = new Boat("Sting Array", 12);
+		Person amy = new Person("Amy", 53, 0);
+		Person john = new Person("John", 55, 0);
+		String actual, expected;
+		expected = "Amy 53 years";
+		//act
+		boat.addPerson(john);
+		boat.addPerson(amy);
+		boat.deletePerson(john);
+		actual = boat.printParty();
 	}
 	
 	

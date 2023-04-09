@@ -26,6 +26,7 @@ public class Boat {
 	private String name;
 	private int capacity;
 	private LinkedList<Person> party;
+	private int remaining;
 	
 	public Boat() {
 		
@@ -35,9 +36,12 @@ public class Boat {
 		this.name = name;
 		this.capacity = capacity;
 		this.party = new LinkedList<>();
+		this.remaining = capacity;
 	}
 	
-	
+	public boolean isFull() {
+		return remaining == 0;
+	}
 	/**
 	 * @return the name
 	 */
@@ -65,16 +69,32 @@ public class Boat {
 	
 	public void addPerson(Person person) {
 		party.add(person);
+		remaining -= 1;
 	}
 	
 	public void deletePerson(Person person) {
 		party.remove(person);
 	}
 	
-	public void printParty() {
+	/**
+	 * @return the remaining
+	 */
+	public int getRemaining() {
+		return remaining;
+	}
+
+	/**
+	 * @param remaining the remaining to set
+	 */
+	public void setRemaining(int remaining) {
+		this.remaining = remaining;
+	}
+
+	public String printParty() {
+		String result = "";
 		for (Person person : party) {
-			System.out.println(person.toString());
-		}
+			result += person.toString() + "\n";
+		}return result;
 	}
 	
 }
