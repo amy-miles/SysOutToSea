@@ -25,8 +25,7 @@ public class Boat {
 	
 	private String name;//name of the boat object
 	private int capacity;//capacity of boat
-	private LinkedList<LinkedList<Person>> manifest;
-	private LinkedList<Person> party;//for list of people objects
+	private LinkedList<LinkedList<Person>> manifest;	
 	private int remaining;//to keep track of remaining capacity
 	
 	/**
@@ -46,7 +45,7 @@ public class Boat {
 		this.capacity = capacity;
 		manifest = new LinkedList<>();		
 		this.remaining = capacity;
-	}
+	}	
 	
 	/**
 	 * @return true if full
@@ -83,23 +82,7 @@ public class Boat {
 		this.capacity = capacity;
 	}
 	
-	/**
-	 *Adds a person to the party linked list
-	 * @param person
-	 */
-	public void addPerson(Person person) {
-		party.add(person);
-		remaining -= 1;
-	}
-	
-	/**
-	 * Removes a person from the linkedlist
-	 * @param person to be removed
-	 */
-	public void deletePerson(Person person) {
-		party.remove(person);
-	}
-	
+
 	/**
 	 * @return the remaining
 	 */
@@ -128,25 +111,15 @@ public class Boat {
 		this.manifest = manifest;
 	}
 
-	/**
-	 * @return the party
-	 */
-	public LinkedList<Person> getParty() {
-		return party;
+	public void addReservation(Reservation reserve) {
+		//to do : add logic if full and to go to next boat
+		//return "fully booked" if no room on any boat
+		manifest.add(reserve.getParty());//adds the party linked list 
+		remaining = capacity - reserve.getCount();//subtracts reservation count from capacity
 	}
+	
+	//to do 
+	//add a print manifest statement
 
-	/**
-	 * @param party the party to set
-	 */
-	public void setParty(LinkedList<Person> party) {
-		this.party = party;
-	}
-
-	public String printParty() {
-		String result = "";
-		for (Person person : party) {
-			result += person.toString() + "\n";
-		}return result;
-	}
 	
 }

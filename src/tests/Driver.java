@@ -36,25 +36,23 @@ public class Driver {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		Person person1 = new Person("Amy", 53, 0);
-		Person person2 = new Person("John", 55, 0);
-		Person person3 = new Person("Zac", 33, 0);
-		person3.setConsiderText("Wheelchair");
-		person3.setConsiderations(true);
-		Boat myBoat = new Boat("SysOut to Sea", 4);
-		myBoat.addPerson(person1);
-		myBoat.addPerson(person2);
-		myBoat.addPerson(person3);
-		//System.out.println(person1.toString());
-		//myBoat.deletePerson(person2);
+		Boat sysOut = new Boat("SysOut to Sea", 12);
+		Boat sting = new Boat("Sting Array", 16);
+		Boat sea = new Boat("Sea++", 12);
 		
-		BufferedReader reader = new BufferedReader(new FileReader("names.txt"));
-		Person person4 = new Person();
-		System.out.println(myBoat.getName());
-		person4.setName(reader.readLine());
-		myBoat.addPerson(person4);
-		System.out.println(myBoat.printParty());
-		System.out.println(myBoat.getRemaining());
+		Reservation res = new Reservation("Miles", "515 512 6039");
+		Person one = new Person("John Miles", 55, 0);
+		Person two = new Person("Amy Miles", 53, 0);
+		res.addPerson(one);
+		res.addPerson(two);
+		System.out.println(res.getPhone());
+		System.out.println(res.printParty());
+		sysOut.addReservation(res);
+		System.out.println(sysOut.getRemaining());
+		
 	}
+	
+
 
 }
+
