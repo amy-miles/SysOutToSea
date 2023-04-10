@@ -23,10 +23,8 @@ public class Person {
 
 	//members
 	private String name;
-	private String age;
-
-	private int years = 0;//default
-	private int months = 0;//default
+	private int age;
+		
 	private boolean considerations = false;//default
 	private String considerText;//special considerations text info
 	
@@ -43,28 +41,22 @@ public class Person {
 	 *@param years Integer age of person in years
 	 *@param months Integer age of person in months
 	 */
-	public Person(String name, int years, int months) {
+	public Person(String name, int age) {
 		this.name = name;
-		this.years = years;
-		this.months = months;	
+		this.age = age;
+		
 	}
 	
 	/**
-	 * Returns the age of the person in years and months,
-	 * since some ages of youth will be entered as months
-	 * @return the age
+	 *@return the age
 	 */
-	public String getAge() {
-		if (getMonths() == 0){
-			return getYears() + " years";
-		}
-		else
-		return getMonths() + " months";
+	public Integer getAge() {
+		return age;
 	}
 	/**
 	 * @param age the age to set
 	 */
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 	/**
@@ -78,30 +70,6 @@ public class Person {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-	/**
-	 * @return the years
-	 */
-	public int getYears() {
-		return years;
-	}
-	/**
-	 * @param years the years to set
-	 */
-	public void setYears(int years) {
-		this.years = years;
-	}
-	/**
-	 * @return the months
-	 */
-	public int getMonths() {
-		return months;
-	}
-	/**
-	 * @param months the months to set
-	 */
-	public void setMonths(int months) {
-		this.months = months;
 	}
 
 	/**
@@ -134,7 +102,7 @@ public class Person {
 			return getName() + " " + getAge() + " " + " Special Considerations: " +
 					getConsiderText();
 		}else
-		return getName() + " " + getAge() ;
+		return getName() + " " + getAge() + " years";
 	}
 	
 	

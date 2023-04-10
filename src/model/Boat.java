@@ -25,7 +25,7 @@ public class Boat {
 	
 	private String name;//name of the boat object
 	private int capacity;//capacity of boat
-	private LinkedList<LinkedList<Person>> manifest;	
+	private LinkedList<Reservation> manifest;	
 	private int remaining;//to keep track of remaining capacity
 	
 	/**
@@ -36,7 +36,7 @@ public class Boat {
 	}
 	
 	/**
-	 * Parameterized constructor
+	 *Parameterized constructor
 	 *@param name String name of boat object
 	 *@param capacity Integer of number of people objects
 	 */
@@ -80,8 +80,7 @@ public class Boat {
 	 */
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
-	
+	}	
 
 	/**
 	 * @return the remaining
@@ -100,26 +99,37 @@ public class Boat {
 	/**
 	 * @return the manifest
 	 */
-	public LinkedList<LinkedList<Person>> getManifest() {
+	public LinkedList<Reservation> getManifest() {
 		return manifest;
 	}
 
 	/**
 	 * @param manifest the manifest to set
 	 */
-	public void setManifest(LinkedList<LinkedList<Person>> manifest) {
+	public void setManifest(LinkedList<Reservation> manifest) {
 		this.manifest = manifest;
 	}
 
-	public void addReservation(Reservation reserve) {
+	public void addReservation(Reservation reserve) throws NoCapacityException, BoatFullException{
 		//to do : add logic if full and to go to next boat
 		//return "fully booked" if no room on any boat
-		manifest.add(reserve.getParty());//adds the party linked list 
-		remaining = capacity - reserve.getCount();//subtracts reservation count from capacity
+		if(!isFull()) {
+			if (getRemaining() >= reserve.getCount()) {
+				manifest.add(reserve);
+				remaining = capacity - reserve.getCount();//subtracts reservation count from capacity
+			}else throw new NoCapacityException("Not enough room to accommodate your party.");
+		}else throw new BoatFullException("Boat is fully booked!");
+
+
 	}
 	
-	//to do 
-	//add a print manifest statement
+	public String displayManifest() {
+		String result = "Manifest of " + getName() + "\n";
+		for (Reservation res: manifest) {
+			result += res.printParty();
+		}
+		return result;
+	}
 
 	
 }

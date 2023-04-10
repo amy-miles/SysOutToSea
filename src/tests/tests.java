@@ -48,30 +48,18 @@ class tests {
 	}
 	
 	@Test
-	void testGetSetYears() {
+	void testGetSetAge() {
 		//arrange
 		Person person = new Person();
 		String expected, actual;
 		expected = "53";
 		//act		
-		person.setYears(53);
-		actual = String.valueOf(person.getYears());
+		person.setAge(53);
+		actual = String.valueOf(person.getAge());
 		//assert
 		assertEquals(actual, expected);
 	}
 	
-	@Test
-	void testGetSetMonths() {
-		//arrange
-		Person person = new Person();
-		String expected, actual;
-		expected = "10";
-		//act		
-		person.setMonths(10);
-		actual = String.valueOf(person.getMonths());
-		//assert
-		assertEquals(actual, expected);
-	}
 	
 	@Test
 	void testGetSetConsiderations() {
@@ -86,7 +74,7 @@ class tests {
 	@Test
 	void testToString() {
 		//arrange
-		Person person = new Person("Amy", 53, 0);
+		Person person = new Person("Amy", 53);
 		String expected, actual;
 		expected = "Amy 53 years";
 		//act
@@ -129,20 +117,7 @@ class tests {
 		assertEquals(actual, expected);
 	}
 	
-	@Test
-	void testAddDeletePerson() {
-		Boat boat = new Boat("Sting Array", 12);
-		Person amy = new Person("Amy", 53, 0);
-		Person john = new Person("John", 55, 0);
-		String actual, expected;
-		expected = "Amy 53 years";
-		//act
-		boat.addPerson(john);
-		boat.addPerson(amy);
-		boat.deletePerson(john);
-		actual = boat.printParty();
-	}
-	
+
 	
 
 }

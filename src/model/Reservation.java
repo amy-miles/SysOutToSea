@@ -1,5 +1,9 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -28,13 +32,18 @@ public class Reservation {
 	private LinkedList<Person> party;//for list of people objects
 	private int count;
 	private String phone;
-	private String resName;	
+	private String resName;		
 	
-	
-	public Reservation(String lName, String phone) {
+	public Reservation(String phone) {
 		party = new LinkedList<>();
+		this.resName = "";
+		this.phone = phone;
+		this.count = 0;
+	}
+	public Reservation(String lName, String phone) {
+		party = new LinkedList<>();//linked list for each party of people
 		this.resName = lName;
-		this.phone = formatPhone(phone);
+		this.phone = formatPhone(phone);//format (555) 555-555
 		this.count = 0;
 	}	
 
@@ -42,8 +51,9 @@ public class Reservation {
 	 *Adds a person to the party linked list
 	 * @param person
 	 */
-	public void addPerson(Person person) {
-		party.add(person);
+	public void addPerson(String name, int age) {
+		Person person = new Person(name, age);
+		party.add(person);		
 		count += 1;
 	}
 	
@@ -97,10 +107,13 @@ public class Reservation {
 	}
 
 	/**
+	 * uses customers name to set the res name to their last name
 	 * @param resName the resName to set
 	 */
-	public void setResName(String resName) {
-		this.resName = resName;
+	public void setResName(String name) {//customers full name
+		int index = name.indexOf(" ");//getting index of space
+		String lastName = name.substring(index + 1);//using substring 
+		this.resName = lastName;//setting the name to their last name
 	}
 	
 	/**
@@ -127,13 +140,9 @@ public class Reservation {
 		for (Person person : party) {
 			result += person.toString() + "\n";
 		}return result;
-	}
+	}	
 	
-	public void run() {
-		//create boats and add default reservations
-		
-		//prompts for user reservation
-	}
+	
 	
 	
 }
