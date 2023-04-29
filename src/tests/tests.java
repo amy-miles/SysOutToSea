@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import model.*;
 
 /**************************************************************
-* Name        : 
+* Name        : Final Project
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -15,10 +15,9 @@ import model.*;
 * OS          : Windows 10
 * Copyright   : This is my own original work based on
 *               specifications issued by our instructor
-* Description : This program overall description here
-*               Input:  list and describe
-*               Output: list and describe
-* Big O		  : 
+* Description : This project simulates a system to reserve a boat.
+* 				
+* Big O		  : O(n)
 * Academic Honesty: I attest that this is my original work.
 * I have not used unauthorized source code, either modified or 
 * unmodified. I have not given other fellow student(s) access to
@@ -188,12 +187,13 @@ class tests {
 		//arrange
 		Boat boat = new Boat("Boat", 4);
 		Reservation res = new Reservation("5155555555");
+		Person person = new Person("Amy", 20);
 		String actual, expected;
 		expected = "Manifest of Boat" + "\n" + "Reservation name: " + "\n"
 				+ "Phone number: (515) 555-5555" + "\n" 
-				+ "Amy 20 years" + "\n";
+				+ "Amy 20 years" + "\n" + "************************" + "\n";
 		//act
-		res.addPerson("Amy", 20);
+		res.addPerson(person);
 		boat.addReservation(res);
 		actual = boat.displayManifest();
 		//assert
@@ -220,11 +220,12 @@ class tests {
 	@Test
 	void testAddPerson() {
 		//arrange
-		Reservation res = new Reservation("LastName", "5555555555");		
+		Reservation res = new Reservation("LastName", "5555555555");
+		Person person = new Person("PersonName", 10);
 		String actual, expected;
 		expected = "[PersonName" + " " + "10 years]";
 		//act
-		res.addPerson("PersonName", 10);
+		res.addPerson(person);
 		actual = res.getParty().toString();
 		//assert
 		assertEquals(actual, expected);
@@ -284,11 +285,12 @@ class tests {
 	@Test
 	void testGetParty() {
 		//arrange
-		Reservation res = new Reservation("LastName", "5555555555");		
+		Reservation res = new Reservation("LastName", "5555555555");
+		Person person = new Person("PersonName", 10);
 		String actual, expected;
 		expected = "[PersonName" + " " + "10 years]";
 		//act
-		res.addPerson("PersonName", 10);
+		res.addPerson(person);
 		actual = res.getParty().toString();
 		//assert
 		assertEquals(actual, expected);
@@ -298,13 +300,14 @@ class tests {
 	@Test
 	void testPrintParty() {
 		//arrange
-		Reservation res = new Reservation("ResName", "5555555555");		
+		Reservation res = new Reservation("ResName", "5555555555");	
+		Person person = new Person("PersonName", 10);
 		String actual, expected;
 		expected = "Reservation name: ResName" + "\n"
 				+ "Phone number: (555) 555-5555" + "\n"
 				+ "PersonName 10 years" + "\n";
 		//act
-		res.addPerson("PersonName", 10);
+		res.addPerson(person);
 		actual = res.printParty();
 		//assert
 		assertEquals(actual, expected);

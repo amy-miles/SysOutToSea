@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedList;
 
 /**************************************************************
-* Name        : 
+* Name        : Final Project
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -11,16 +11,21 @@ import java.util.LinkedList;
 * OS          : Windows 10
 * Copyright   : This is my own original work based on
 *               specifications issued by our instructor
-* Description : This program overall description here
-*               Input:  list and describe
-*               Output: list and describe
-* Big O		  : 
+* Description : This project simulates a system to reserve a boat.
+* 				A Boat object, from the Boat class,  has a linked list of reservation objects. 
+* 				The reservation class has a linked list of person objects
+* 				from the Person class.
+* Big O		  : O(n)
 * Academic Honesty: I attest that this is my original work.
 * I have not used unauthorized source code, either modified or 
 * unmodified. I have not given other fellow student(s) access to
 * my program.         
 ***************************************************************/
-
+/*
+ * This class contains the attributes and functions for the boat class
+ * The main attribute is the manifest linked list that is made of 
+ * reservation objects. It accepts a reservation as long as there is room in the boat. 
+ */
 public class Boat {
 	
 	private String name;//name of the boat object
@@ -95,10 +100,28 @@ public class Boat {
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;
 	}
+
+	/*
+	 * This method checks to see if the boat will fit the number
+	 * of people in the reservation
+	 * @param num Integer number of people in reservation
+	 */
+	public boolean checkCapacity(int num) {
+		if (this.remaining >= num) {
+			return true;
+		}else return false;
+	}
 	
+	/**
+	 * this method adds a reservation object. It checks if the capacity
+	 * of the boat isFull() if not full, evaluates the remaining capacity
+	 * and the count of the reservation. If the capacity will accommodate the 
+	 * count, the reservation is added. 
+	 * @param reserve the reservation object
+	 * @throws NoCapacityException throws exception if the capacity remaining will not accommodate the new reservation
+	 * @throws BoatFullException throws exception if the capacity is zero
+	 */
 	public void addReservation(Reservation reserve) throws NoCapacityException, BoatFullException{
-		//to do : add logic if full and to go to next boat
-		//return "fully booked" if no room on any boat
 		if(!isFull()) {
 			if (getRemaining() >= reserve.getCount()) {
 				manifest.add(reserve);
@@ -107,11 +130,17 @@ public class Boat {
 		}else throw new BoatFullException("Boat is fully booked!");
 	}
 	
+	/**
+	 * This method returns a String containing the name of boat, and calls the printParty()
+	 * method to print the names and ages and special considerations, if exists
+	 * @return result 
+	 */
 	public String displayManifest() {
 		String result = "Manifest of " + getName() + "\n";
-		for (Reservation res: manifest) {
-			result += res.printParty();
+		for (Reservation res: manifest) {//for each reservation, print the party linked list of Persons
+			result += res.printParty() + "************************" + "\n";//concat to result String
 		}
+		
 		return result;
 	}
 

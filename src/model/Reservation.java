@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**************************************************************
-* Name        : 
+* Name        : Final Project
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -16,17 +16,20 @@ import java.util.Random;
 * OS          : Windows 10
 * Copyright   : This is my own original work based on
 *               specifications issued by our instructor
-* Description : This program overall description here
-*               Input:  list and describe
-*               Output: list and describe
-* Big O		  : 
+* Description : This project simulates a system to reserve a boat.
+* 				A Boat object, from the Boat class,  has a linked list of reservation objects. 
+* 				The reservation class has a linked list of person objects
+* 				from the Person class.
+* Big O		  : O(n)
 * Academic Honesty: I attest that this is my original work.
 * I have not used unauthorized source code, either modified or 
 * unmodified. I have not given other fellow student(s) access to
-* my program.
-* = r.nextInt(MAX_LINE_SIZE  - MIN_LINE_SIZE ) + MIN_LINE_SIZE;         
+* my program.         
 ***************************************************************/
-
+/*
+ * This class creates the reservation. Each reservation is added to the Boat class
+ * in it's manifest linked list. 
+ */
 public class Reservation {
 	
 	private LinkedList<Person> party;//for list of people objects
@@ -34,12 +37,24 @@ public class Reservation {
 	private String phone;
 	private String resName;		
 	
+	/**
+	 * This constructor creates a reservation object with a telephone number as param
+	 * It creates a LinkedList object to store the Person objects and
+	 * sets resName, phone, and count attributes
+	 *@param phone String phone number to be set
+	 */
 	public Reservation(String phone) {
 		party = new LinkedList<>();
 		this.resName = "";
 		this.phone = formatPhone(phone);
 		this.count = 0;
 	}
+	
+	/**
+	 * this constructor accepts a lastname and phone number to create a reservation. 
+	 *@param lName String last name of the reservation
+	 *@param phone String phone number to be set
+	 */
 	public Reservation(String lName, String phone) {
 		party = new LinkedList<>();//linked list for each party of people
 		this.resName = lName;
@@ -49,14 +64,22 @@ public class Reservation {
 
 	/**
 	 *Adds a person to the party linked list
-	 * @param person
+	 * @param name String name of person object
+	 * @param age int age of person object
 	 */
-	public void addPerson(String name, int age) {
-		Person person = new Person(name, age);
+	public void addPerson(Person person) {
+		//Person person = new Person(name, age);
 		party.add(person);		
 		count += 1;
 	}
 	
+	/**
+	 * This method formats a phone number
+	 * it takes the input and removes all special characters.
+	 * It then reformats to include parenthesis and space and hyphen
+	 * @param number String phone number to be formatted
+	 * @return result String of formatted phone number
+	 */
 	public String formatPhone(String number) {
 		String result = number.replaceAll("[^0-9]","");
 		result = result.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
@@ -111,11 +134,11 @@ public class Reservation {
 	public LinkedList<Person> getParty() {
 		return party;
 	}
-
-	public void addReservation(Reservation reserve) {
-		//calls the method from Boat object
-	}
-
+	
+	/**
+	 * This method displays the the reservation and the contents of the party LinkedList
+	 * @return result String of Reservation objects and linkedList
+	 */
 	public String printParty() {
 		String result = "Reservation name: " + getResName() + "\n" +
 				"Phone number: " + getPhone() + "\n";
