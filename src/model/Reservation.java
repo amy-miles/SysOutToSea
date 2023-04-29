@@ -37,7 +37,7 @@ public class Reservation {
 	public Reservation(String phone) {
 		party = new LinkedList<>();
 		this.resName = "";
-		this.phone = phone;
+		this.phone = formatPhone(phone);
 		this.count = 0;
 	}
 	public Reservation(String lName, String phone) {
@@ -56,14 +56,6 @@ public class Reservation {
 		party.add(person);		
 		count += 1;
 	}
-	
-	/**
-	 * Removes a person from the linkedlist
-	 * @param person to be removed
-	 */
-	public void deletePerson(Person person) {
-		party.remove(person);
-	}	
 	
 	public String formatPhone(String number) {
 		String result = number.replaceAll("[^0-9]","");
@@ -96,7 +88,7 @@ public class Reservation {
 	 * @param phone the phone to set
 	 */
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.phone = formatPhone(phone);
 	}
 
 	/**
@@ -107,13 +99,10 @@ public class Reservation {
 	}
 
 	/**
-	 * uses customers name to set the res name to their last name
 	 * @param resName the resName to set
 	 */
-	public void setResName(String name) {//customers full name
-		int index = name.indexOf(" ");//getting index of space
-		String lastName = name.substring(index + 1);//using substring 
-		this.resName = lastName;//setting the name to their last name
+	public void setResName(String resName) {
+		this.resName = resName;
 	}
 	
 	/**
@@ -121,13 +110,6 @@ public class Reservation {
 	 */
 	public LinkedList<Person> getParty() {
 		return party;
-	}
-
-	/**
-	 * @param party the party to set
-	 */
-	public void setParty(LinkedList<Person> party) {
-		this.party = party;
 	}
 
 	public void addReservation(Reservation reserve) {

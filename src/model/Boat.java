@@ -96,20 +96,6 @@ public class Boat {
 		this.remaining = remaining;
 	}
 	
-	/**
-	 * @return the manifest
-	 */
-	public LinkedList<Reservation> getManifest() {
-		return manifest;
-	}
-
-	/**
-	 * @param manifest the manifest to set
-	 */
-	public void setManifest(LinkedList<Reservation> manifest) {
-		this.manifest = manifest;
-	}
-
 	public void addReservation(Reservation reserve) throws NoCapacityException, BoatFullException{
 		//to do : add logic if full and to go to next boat
 		//return "fully booked" if no room on any boat
@@ -119,8 +105,6 @@ public class Boat {
 				remaining = capacity - reserve.getCount();//subtracts reservation count from capacity
 			}else throw new NoCapacityException("Not enough room to accommodate your party.");
 		}else throw new BoatFullException("Boat is fully booked!");
-
-
 	}
 	
 	public String displayManifest() {

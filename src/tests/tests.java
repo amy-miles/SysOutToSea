@@ -26,7 +26,7 @@ import model.*;
 ***************************************************************/
 
 class tests {
-
+	//person class tests//
 	@Test
 	void testCreatePerson() {
 		//arrange
@@ -83,6 +83,7 @@ class tests {
 		assertEquals(actual, expected);
 	}
 	
+	//Boat class tests//
 	@Test
 	void testCreateBoat() {
 		//arrange
@@ -92,13 +93,13 @@ class tests {
 	}
 	
 	@Test
-	void testGetSetNameBoat() {
+	void testGetSetName() {
 		//arrange
 		Boat boat = new Boat();
-		String expected, actual;
-		expected = "Sting Array";
-		//assert
-		boat.setName("Sting Array");
+		String actual, expected;
+		expected = "Boat";
+		//act
+		boat.setName("Boat");
 		actual = boat.getName();
 		//assert
 		assertEquals(actual, expected);
@@ -117,7 +118,195 @@ class tests {
 		assertEquals(actual, expected);
 	}
 	
-
+	@Test
+	void testIsFullTrue() {
+		//arrange
+		Boat boat = new Boat("Boat", 6);
+		//act
+		boat.setRemaining(0);
+		//assert
+		assertTrue(boat.isFull());
+	}
 	
-
+	@Test
+	void testIsFullFalse() {
+		//arrange
+		Boat boat = new Boat("Boat", 6);
+		//act
+		boat.setRemaining(4);
+		//assert
+		assertFalse(boat.isFull());
+	}
+	
+	@Test
+	void testGetSetRemaining() {
+		//arrange
+		Boat boat = new Boat();
+		int expected, actual;
+		expected = 4;
+		//assert
+		boat.setRemaining(4);
+		actual = boat.getRemaining();
+		//assert
+		assertEquals(actual, expected);
+	}
+		
+	@Test
+	void testAddReservation() throws NoCapacityException, BoatFullException{
+		//arrange
+		Boat boat = new Boat("Boat", 4);
+		Reservation res = new Reservation("5155555555");		
+		//act
+		boat.addReservation(res);
+		//assert
+		assertNotNull(boat.displayManifest());
+	}
+	
+	@Test
+	void testAddReservationThrowsNoCapExc() throws NoCapacityException, BoatFullException{
+		//arrange
+		Boat boat = new Boat("Boat", 4);
+		Reservation res = new Reservation("5155555555");
+		//act
+		res.setCount(5);		
+		assertThrows(NoCapacityException.class, () -> boat.addReservation(res));
+	}
+	
+	@Test
+	void testAddReservationThrowsBoatFullExc() throws NoCapacityException, BoatFullException{
+		//arrange
+		Boat boat = new Boat("Boat", 4);
+		Reservation res = new Reservation("5155555555");
+		//act
+		boat.setRemaining(0);
+		res.setCount(2);		
+		assertThrows(BoatFullException.class, () -> boat.addReservation(res));
+	}
+	
+	@Test
+	void testDisplayManifest() throws NoCapacityException, BoatFullException{
+		//arrange
+		Boat boat = new Boat("Boat", 4);
+		Reservation res = new Reservation("5155555555");
+		String actual, expected;
+		expected = "Manifest of Boat" + "\n" + "Reservation name: " + "\n"
+				+ "Phone number: (515) 555-5555" + "\n" 
+				+ "Amy 20 years" + "\n";
+		//act
+		res.addPerson("Amy", 20);
+		boat.addReservation(res);
+		actual = boat.displayManifest();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	//Reservation class tests//
+	@Test
+	void testCreateReservationPhone() {
+		//arrange
+		Reservation res = new Reservation("5555555555");
+		//assert
+		assertNotNull(res);
+	}
+	
+	@Test
+	void testCreateReservationPhoneLastName() {
+		//arrange
+		Reservation res = new Reservation("LastName", "5555555555");
+		//assert
+		assertNotNull(res);
+	}
+	
+	@Test
+	void testAddPerson() {
+		//arrange
+		Reservation res = new Reservation("LastName", "5555555555");		
+		String actual, expected;
+		expected = "[PersonName" + " " + "10 years]";
+		//act
+		res.addPerson("PersonName", 10);
+		actual = res.getParty().toString();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testFormatPhone() {
+		//arrange
+		Reservation res = new Reservation("5555555555");
+		String actual, expected;
+		expected = "(555) 555-5555";
+		//act
+		actual = res.getPhone();
+		//assert
+		assertEquals(actual, expected);		
+	}
+	
+	@Test
+	void testGetSetCount() {
+		//arrange
+		Reservation res = new Reservation("5555555555");
+		int actual, expected;
+		expected = 12;
+		//act
+		res.setCount(12);
+		actual = res.getCount();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testGetSetPhone() {
+		//arrange
+		Reservation res = new Reservation("5555555555");
+		String actual, expected;
+		expected = "(555) 555-5555";
+		//act
+		res.setPhone("5555555555");
+		actual = res.getPhone();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testGetSetResName() {
+		//arrange
+		Reservation res = new Reservation("5555555555");
+		String actual, expected;
+		expected = "ResName";
+		//act
+		res.setResName("ResName");
+		actual = res.getResName();
+		//assert
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	void testGetParty() {
+		//arrange
+		Reservation res = new Reservation("LastName", "5555555555");		
+		String actual, expected;
+		expected = "[PersonName" + " " + "10 years]";
+		//act
+		res.addPerson("PersonName", 10);
+		actual = res.getParty().toString();
+		//assert
+		assertEquals(actual, expected);
+		
+	}
+	
+	@Test
+	void testPrintParty() {
+		//arrange
+		Reservation res = new Reservation("ResName", "5555555555");		
+		String actual, expected;
+		expected = "Reservation name: ResName" + "\n"
+				+ "Phone number: (555) 555-5555" + "\n"
+				+ "PersonName 10 years" + "\n";
+		//act
+		res.addPerson("PersonName", 10);
+		actual = res.printParty();
+		//assert
+		assertEquals(actual, expected);
+	}
 }

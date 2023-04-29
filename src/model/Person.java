@@ -23,8 +23,7 @@ public class Person {
 
 	//members
 	private String name;
-	private int age;
-		
+	private int age;		
 	private boolean considerations = false;//default
 	private String considerText;//special considerations text info
 	
