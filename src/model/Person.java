@@ -1,7 +1,10 @@
 package model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**************************************************************
-* Name        : Final Project
+* Name        : Sysout to Sea
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -98,6 +101,7 @@ public class Person {
 	public void setConsiderText(String considerText) {
 		this.considerText = considerText;
 	}
+	
 	@Override
 	public String toString() {
 		if (isConsiderations()) {

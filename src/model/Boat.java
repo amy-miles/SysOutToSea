@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedList;
 
 /**************************************************************
-* Name        : Final Project
+* Name        : Sysout to Sea
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -26,7 +26,7 @@ import java.util.LinkedList;
  * The main attribute is the manifest linked list that is made of 
  * reservation objects. It accepts a reservation as long as there is room in the boat. 
  */
-public class Boat {
+public class Boat{
 	
 	private String name;//name of the boat object
 	private int capacity;//capacity of boat
@@ -143,6 +143,8 @@ public class Boat {
 		
 		return result;
 	}
+
+
 
 	
 }

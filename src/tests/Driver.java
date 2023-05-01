@@ -17,7 +17,7 @@ import model.*;
 
 
 /**************************************************************
-* Name        : Final Project
+* Name        : Sysout to Sea
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -38,30 +38,71 @@ public class Driver {
 
 
 	public static void main(String[] args) throws IOException {
+		
 		//create a boat object
-		Boat boat = new Boat("Sting Array", 4);
+		/*
+		 * You may change the capacity of the boat to see the 
+		 * functionality of the program. If you put the capacity at 0, 
+		 * you will not be able to make a reservation. The program will 
+		 * prompt user for how many reservations they would like to input. 
+		 * This number is used to loop and ask user for reservation input. 
+		 * If the capacity is enough to accommodate all reservations, the
+		 * program displays the manifest, or the results of all reservation
+		 * inputs. If the capacity is not enough to accommodate all reservations,
+		 * the program informs user and displays the accepted reservations. 
+		 */
+		int capacity = 4;//you may change this 
+		
+		Boat boat = new Boat("Sting Array", capacity);
+		
+		Validate validator = new Validate();
+		
 		//Create a scanner object to get input from user
 		Scanner in = new Scanner(System.in);
 		
 		System.out.println("How many reservations would you like to make?");
-		int numRes = in.nextInt();
+		String numRes = in.next();
+		
+		while(!validator.validateNumOnly(numRes)) {
+			System.out.println("Not valid input. How many reservations would you "
+					+ "like to enter?");
+			numRes = in.next();
+		}
+		
+		int resCount = Integer.parseInt(numRes);
+		
 		
 		//looping for each reservation
-		for (int i = 0; i < numRes; i++) {
+		for (int i = 0; i < resCount; i++) {
 			//find out if there is enough room in boat for reservation 
 			System.out.println("How many people in the party?");
-			int num = in.nextInt();
-			if(boat.checkCapacity(num)) {//if enough room, proceed with reservation
+			String num = in.next();
+			
+			while(!validator.validateNumOnly(num)) {
+				System.out.println("Not valid input. How many people in your "
+						+ "party?");
+				num = in.next();
+			}
+			
+			int partyNum = Integer.parseInt(num);
+			
+			if(boat.checkCapacity(partyNum)) {//if enough room, proceed with reservation
 				//reservation input from user
 				System.out.println("Enter the last name of the reservation:");
 				String lastName = in.next();
-				System.out.println("Enter the phone number:");
+				System.out.println("Enter the ten digit phone number:");
 				String phoneNum = in.next();
+				
+				while(!validator.validatePhone(phoneNum)) {
+					System.out.println("Not a valid phone number. Enter the ten digit "
+							+ "phone number.");
+					phoneNum = in.next();
+				}
 				
 				//create the reservation with user input parameters
 				Reservation res = new Reservation(lastName, phoneNum);
 				//looping to get names, ages, and special considerations of passengers
-				for (int j = 0; j < num; j++) {
+				for (int j = 0; j < partyNum; j++) {
 					System.out.println("Enter the name of the passenger:");
 					String name = in.next();
 					System.out.println("Enter the age of the passenger:");
@@ -70,16 +111,20 @@ public class Driver {
 					
 					Person person = new Person(name, age);//create person with params
 					
-					System.out.println("Does the passenger have any special considerations? Enter 'yes or 'no'");
+					System.out.println("Does the passenger have any special considerations? Enter 'yes' or 'no'");
 					String consider = in.next();
-						if (isValid(consider)) {
+					
+					while(!validator.validateYN(consider)) {
+						System.out.println("Not valid input. Enter 'yes' or 'no'");
+						consider = in.next();
+					}
+					
 							if (consider.equals("yes")) {
 								person.setConsiderations(true);
 								System.out.println("Please enter the special consideration.");
 								String conText = in.next();
 								person.setConsiderText(conText);								
-							}else break;
-						}
+							}						
 						
 					res.addPerson(person);
 				}
@@ -105,13 +150,7 @@ public class Driver {
 		
 	}
 	
-	/*
-	 * This method evaluates a string for a valid input yes or no
-	 */
-	static boolean isValid(String str) {
-		return str.equals("yes") || str.equals("no");
-	}
-	
+
 	
 
 

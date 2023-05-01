@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**************************************************************
-* Name        : Final Project
+* Name        : Sysout to Sea
 * Author      : Amy Miles
 * Created     : Apr 8, 2023
 * Course      : CIS 152 Data Structures
@@ -35,7 +37,14 @@ public class Reservation {
 	private LinkedList<Person> party;//for list of people objects
 	private int count;
 	private String phone;
-	private String resName;		
+	private String resName;	
+	
+	public Reservation() {
+		party = new LinkedList<>();
+		this.resName = "";
+		this.phone = "";
+		this.count = 0;
+	}
 	
 	/**
 	 * This constructor creates a reservation object with a telephone number as param
@@ -67,8 +76,7 @@ public class Reservation {
 	 * @param name String name of person object
 	 * @param age int age of person object
 	 */
-	public void addPerson(Person person) {
-		//Person person = new Person(name, age);
+	public void addPerson(Person person) {				
 		party.add(person);		
 		count += 1;
 	}
