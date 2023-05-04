@@ -24,12 +24,13 @@ import java.util.regex.Pattern;
 ***************************************************************/
 
 /*
- * This class has the methods to validate user input
+ * This class has the methods to validate user input 
+ * with regular expressions
  */
 public class Validate {
 	
 	/**
-	 * Default constuctor
+	 * Default constructor
 	 */
 	public Validate() {
 		

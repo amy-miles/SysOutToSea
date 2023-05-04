@@ -1,7 +1,5 @@
 package model;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**************************************************************
 * Name        : Sysout to Sea
@@ -102,10 +100,14 @@ public class Person {
 		this.considerText = considerText;
 	}
 	
+	/**
+	 * This concatenates a String with the name, age, and special
+	 * considerations if present
+	 */
 	@Override
 	public String toString() {
 		if (isConsiderations()) {
-			return getName() + " " + getAge() + " " + " Special Considerations: " +
+			return getName() + " " + getAge() + " years" + " Special Considerations: " +
 					getConsiderText();
 		}else
 		return getName() + " " + getAge() + " years";

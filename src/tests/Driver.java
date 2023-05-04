@@ -1,18 +1,6 @@
 package tests;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import model.*;
 
 
@@ -42,57 +30,64 @@ public class Driver {
 		//create a boat object
 		/*
 		 * You may change the capacity of the boat to see the 
-		 * functionality of the program. If you put the capacity at 0, 
-		 * you will not be able to make a reservation. The program will 
-		 * prompt user for how many reservations they would like to input. 
-		 * This number is used to loop and ask user for reservation input. 
-		 * If the capacity is enough to accommodate all reservations, the
-		 * program displays the manifest, or the results of all reservation
-		 * inputs. If the capacity is not enough to accommodate all reservations,
-		 * the program informs user and displays the accepted reservations. 
+		 * functionality of the program without having to enter
+		 * so many names. If you put the capacity at 0, 
+		 * you will not be able to make a reservation, as the 
+		 * capacity is checked before a reservation object is made.
+		 * The program will prompt user for how many reservations 
+		 * they would like to input. This number is used to loop and 
+		 * ask user for reservation input.If the capacity is enough to 
+		 * accommodate all reservations, the program displays the manifest, 
+		 * or the results of all reservation inputs. If the capacity is 
+		 * not enough to accommodate all reservations,the program informs
+		 *  user and displays the accepted reservations. 
 		 */
 		int capacity = 4;//you may change this 
 		
 		Boat boat = new Boat("Sting Array", capacity);
 		
-		Validate validator = new Validate();
+		/*validation class object to use validation methods
+		for user input*/
+		Validate validator = new Validate(); 
 		
 		//Create a scanner object to get input from user
-		Scanner in = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);		
 		
 		System.out.println("How many reservations would you like to make?");
 		String numRes = in.next();
-		
+		//validate the user input for numbers only
 		while(!validator.validateNumOnly(numRes)) {
 			System.out.println("Not valid input. How many reservations would you "
 					+ "like to enter?");
 			numRes = in.next();
 		}
 		
-		int resCount = Integer.parseInt(numRes);
-		
+		//must change the input(String) to an Integer
+		int resCount = Integer.parseInt(numRes);		
 		
 		//looping for each reservation
 		for (int i = 0; i < resCount; i++) {
 			//find out if there is enough room in boat for reservation 
 			System.out.println("How many people in the party?");
 			String num = in.next();
-			
+			//validate user input for numbers only
 			while(!validator.validateNumOnly(num)) {
 				System.out.println("Not valid input. How many people in your "
 						+ "party?");
 				num = in.next();
 			}
 			
+			//must change the input(String) to an Integer
 			int partyNum = Integer.parseInt(num);
 			
+			//check capacity
 			if(boat.checkCapacity(partyNum)) {//if enough room, proceed with reservation
 				//reservation input from user
 				System.out.println("Enter the last name of the reservation:");
 				String lastName = in.next();
 				System.out.println("Enter the ten digit phone number:");
 				String phoneNum = in.next();
-				
+				//validate phone number input for 10 digits
 				while(!validator.validatePhone(phoneNum)) {
 					System.out.println("Not a valid phone number. Enter the ten digit "
 							+ "phone number.");
@@ -114,11 +109,15 @@ public class Driver {
 					System.out.println("Does the passenger have any special considerations? Enter 'yes' or 'no'");
 					String consider = in.next();
 					
+					//validating input to "yes" or "no", case sensitive
 					while(!validator.validateYN(consider)) {
 						System.out.println("Not valid input. Enter 'yes' or 'no'");
 						consider = in.next();
 					}
-					
+							/*
+							 * Setting flag for considerations. The true flag
+							 * will cause the special considerations to be printed
+							 */
 							if (consider.equals("yes")) {
 								person.setConsiderations(true);
 								System.out.println("Please enter the special consideration.");
@@ -129,7 +128,9 @@ public class Driver {
 					res.addPerson(person);
 				}
 				
-				//add reservation
+				/*add reservation 
+				capacity was checked before reservation object made,
+				shouldn't throw exception*/
 				try {
 					boat.addReservation(res);
 				} catch (NoCapacityException e) {
@@ -149,10 +150,6 @@ public class Driver {
 		
 		
 	}
-	
-
-	
-
 
 }
 

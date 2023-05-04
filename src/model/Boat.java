@@ -124,6 +124,7 @@ public class Boat{
 	public void addReservation(Reservation reserve) throws NoCapacityException, BoatFullException{
 		if(!isFull()) {
 			if (getRemaining() >= reserve.getCount()) {
+				
 				manifest.add(reserve);
 				remaining = capacity - reserve.getCount();//subtracts reservation count from capacity
 			}else throw new NoCapacityException("Not enough room to accommodate your party.");
@@ -136,15 +137,16 @@ public class Boat{
 	 * @return result 
 	 */
 	public String displayManifest() {
+
 		String result = "Manifest of " + getName() + "\n";
+		if (manifest.isEmpty()) {
+			result += "There are no reservations.";
+		}
 		for (Reservation res: manifest) {//for each reservation, print the party linked list of Persons
 			result += res.printParty() + "************************" + "\n";//concat to result String
-		}
-		
+		}		
 		return result;
 	}
-
-
 
 	
 }

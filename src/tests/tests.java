@@ -34,32 +34,32 @@ class tests {
 		String str = "55";
 		//assert
 		assertTrue(v.validateNumOnly(str));
-	}
-	
+	}	
+	@Test
 	void testValidateNumOnlyFalse() {
 		//arrange
 		Validate v = new Validate();
 		String str = "Amy";
 		//assert
 		assertFalse(v.validateNumOnly(str));
-	}
-	
+	}	
+	@Test
 	void testValidateYesTrue() {
 		//arrange
 		Validate v = new Validate();
 		String str = "yes";
 		//assert
-		assertTrue(v.validateNumOnly(str));
+		assertTrue(v.validateYN(str));
 	}
-	
+	@Test
 	void testValidateNoTrue() {
 		//arrange
 		Validate v = new Validate();
 		String str = "no";
 		//assert
-		assertTrue(v.validateNumOnly(str));
+		assertTrue(v.validateYN(str));
 	}
-	
+	@Test
 	void testValidateYNFalse() {
 		//arrange
 		Validate v = new Validate();
@@ -67,7 +67,7 @@ class tests {
 		//assert
 		assertFalse(v.validateNumOnly(str));
 	}
-	
+	@Test
 	void testValidatePhoneTrue() {
 		//arrange
 		Validate v = new Validate();
@@ -75,7 +75,7 @@ class tests {
 		//assert
 		assertTrue(v.validatePhone(str));
 	}
-	
+	@Test
 	void testValidatePhoneSpecialCharsTrue() {
 		//arrange
 		Validate v = new Validate();
@@ -83,7 +83,7 @@ class tests {
 		//assert
 		assertTrue(v.validatePhone(str));
 	}
-	
+	@Test
 	void testValidatePhoneFalse() {
 		//arrange
 		Validate v = new Validate();
@@ -100,7 +100,7 @@ class tests {
 		//assert
 		assertNotNull(person);
 	}
-	
+	@Test
 	void testGetSetNamePerson() {
 		Person person = new Person();
 		String expected, actual;
@@ -111,7 +111,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testGetSetAge() {
 		//arrange
 		Person person = new Person();
@@ -122,9 +122,8 @@ class tests {
 		actual = String.valueOf(person.getAge());
 		//assert
 		assertEquals(actual, expected);
-	}
-	
-	
+	}	
+	@Test
 	void testGetSetConsiderations() {
 		//arrange
 		Person person = new Person();
@@ -133,7 +132,7 @@ class tests {
 		//assert
 		assertTrue(person.isConsiderations());
 	}
-	
+	@Test
 	void testToString() {
 		//arrange
 		Person person = new Person("Amy", 53);
@@ -153,7 +152,7 @@ class tests {
 		//assert
 		assertNotNull(boat);
 	}
-	
+	@Test
 	void testGetSetName() {
 		//arrange
 		Boat boat = new Boat();
@@ -165,7 +164,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testGetSetCapacity() {
 		//arrange
 		Boat boat = new Boat();
@@ -177,7 +176,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-
+	@Test
 	void testIsFullTrue() {
 		//arrange
 		Boat boat = new Boat("Boat", 6);
@@ -186,7 +185,7 @@ class tests {
 		//assert
 		assertTrue(boat.isFull());
 	}
-	
+	@Test
 	void testIsFullFalse() {
 		//arrange
 		Boat boat = new Boat("Boat", 6);
@@ -195,7 +194,7 @@ class tests {
 		//assert
 		assertFalse(boat.isFull());
 	}
-
+	@Test
 	void testGetSetRemaining() {
 		//arrange
 		Boat boat = new Boat();
@@ -207,7 +206,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-		
+	@Test	
 	void testAddReservation() throws NoCapacityException, BoatFullException{
 		//arrange
 		Boat boat = new Boat("Boat", 4);
@@ -217,7 +216,7 @@ class tests {
 		//assert
 		assertNotNull(boat.displayManifest());
 	}
-	
+	@Test
 	void testAddReservationThrowsNoCapExc() throws NoCapacityException, BoatFullException{
 		//arrange
 		Boat boat = new Boat("Boat", 4);
@@ -226,7 +225,7 @@ class tests {
 		res.setCount(5);		
 		assertThrows(NoCapacityException.class, () -> boat.addReservation(res));
 	}
-	
+	@Test
 	void testAddReservationThrowsBoatFullExc() throws NoCapacityException, BoatFullException{
 		//arrange
 		Boat boat = new Boat("Boat", 4);
@@ -236,7 +235,7 @@ class tests {
 		res.setCount(2);		
 		assertThrows(BoatFullException.class, () -> boat.addReservation(res));
 	}
-	
+	@Test
 	void testDisplayManifest() throws NoCapacityException, BoatFullException{
 		//arrange
 		Boat boat = new Boat("Boat", 4);
@@ -262,14 +261,14 @@ class tests {
 		//assert
 		assertNotNull(res);
 	}
-	
+	@Test
 	void testCreateReservationPhoneLastName() {
 		//arrange
 		Reservation res = new Reservation("LastName", "5555555555");
 		//assert
 		assertNotNull(res);
 	}
-	
+	@Test
 	void testAddPerson() {
 		//arrange
 		Reservation res = new Reservation("LastName", "5555555555");
@@ -282,7 +281,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testFormatPhone() {
 		//arrange
 		Reservation res = new Reservation("5555555555");
@@ -293,7 +292,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);		
 	}
-	
+	@Test
 	void testGetSetCount() {
 		//arrange
 		Reservation res = new Reservation("5555555555");
@@ -305,7 +304,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testGetSetPhone() {
 		//arrange
 		Reservation res = new Reservation("5555555555");
@@ -317,7 +316,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testGetSetResName() {
 		//arrange
 		Reservation res = new Reservation("5555555555");
@@ -329,7 +328,7 @@ class tests {
 		//assert
 		assertEquals(actual, expected);
 	}
-	
+	@Test
 	void testGetParty() {
 		//arrange
 		Reservation res = new Reservation("LastName", "5555555555");
@@ -343,7 +342,7 @@ class tests {
 		assertEquals(actual, expected);
 		
 	}	
-
+	@Test
 	void testPrintParty() {
 		//arrange
 		Reservation res = new Reservation("ResName", "5555555555");	
