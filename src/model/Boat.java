@@ -24,7 +24,7 @@ import java.util.LinkedList;
 /*
  * This class contains the attributes and functions for the boat class
  * The main attribute is the manifest linked list that is made of 
- * reservation objects. It accepts a reservation as long as there is room in the boat. 
+ * Reservation objects. It accepts a reservation as long as there is room in the boat. 
  */
 public class Boat{
 	
